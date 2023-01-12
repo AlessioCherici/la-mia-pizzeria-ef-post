@@ -34,6 +34,11 @@ namespace MyPizzeriaModel.Controllers
                 return View(pizza);
                 }
             }
+        [HttpGet]
+        public IActionResult FormAddPizza()
+            {
+            return View("FormPizza"); 
+            }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
