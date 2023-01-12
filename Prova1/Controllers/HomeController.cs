@@ -40,6 +40,20 @@ namespace MyPizzeriaModel.Controllers
             return View("FormPizza"); 
             }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult FormAddPizza(Pizza formData) 
+            {
+            if (!ModelState.IsValid) 
+                {
+                return View("FormPizza");
+                }
+            using PizzaContext db = new PizzaContext();
+            db.Pizzas.Add(formData);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

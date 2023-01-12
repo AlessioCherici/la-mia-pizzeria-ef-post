@@ -1,8 +1,10 @@
 ﻿
 @model Pizza
 
+
+
 <div class="container">
-    <form asp-controller="Greeting" asp-action="Create" method="post">
+    <form asp-controller="Home" asp-action="FormAddPizza" method="post">
         @Html.AntiForgeryToken()
         <div class="text-center">Inserisci una nuova pizza: </div>
         <div class="mb-3">

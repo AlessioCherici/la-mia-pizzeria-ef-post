@@ -19,6 +19,11 @@ namespace MyPizzeriaModel.Models
         public string Descrizione { get; set; }
         public string Immagine { get; set; }
 
+        public Pizza()
+            {
+
+            }
+
         public Pizza (string nome, string prezzo, string descrizione, string Immagine)
             {
             this.Nome = nome;
