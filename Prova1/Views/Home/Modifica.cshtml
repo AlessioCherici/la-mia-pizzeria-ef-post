@@ -1,0 +1,29 @@
+﻿@model Pizza
+
+<div class="container">
+    <form asp-controller="Home" asp-action="FormEditPizza" method="post">
+        @Html.AntiForgeryToken()
+        <input asp-for="Id" type="hidden" class="form-control">
+        <div class="text-center">Modifica la pizza scelta: </div>
+        <div class="mb-3">
+            <strong>Nome:</strong>
+            <input asp-for="Nome" class="d-block w-100" />
+        </div>
+        <div class="mb-3">
+            <strong>Prezzo:</strong>
+            <input asp-for="Prezzo" class="d-block w-100" />
+        </div>
+        <div class="mb-3">
+            <strong>Descrizione:</strong>
+            <input asp-for="Descrizione" class="d-block w-100" />
+        </div>
+        <div class="mb-3">
+            <strong>Immagine:</strong>
+            <input asp-for="Immagine" class="d-block w-100" />
+        </div>
+        <div class="text-end">
+            <input type="submit" class="btn btn-small btn-info" value="Applica le modifiche!">
+        </div>
+    </form>
+</div>
+    </main>

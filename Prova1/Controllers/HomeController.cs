@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.SqlServer.Server;
 using MyPizzeriaModel.Models;
 using System.Diagnostics;
 
@@ -31,10 +32,25 @@ namespace MyPizzeriaModel.Controllers
                 }
             else
                 {
-                return View(pizza);
+                return View("Dettagli",pizza);
                 }
             }
-        [HttpGet]
+
+        public IActionResult Modifica(int id)
+            {
+            using PizzaContext db = new PizzaContext();
+            Pizza pizza = (from p in db.Pizzas where p.Id == id select p).FirstOrDefault();
+            if (pizza == null)
+                {
+                return NotFound();
+                }
+            else
+                {
+                return View("Modifica", pizza);
+                }
+            }
+            
+    [HttpGet]
         public IActionResult FormAddPizza()
             {
             return View("FormPizza"); 
@@ -53,6 +69,34 @@ namespace MyPizzeriaModel.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
             }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult FormEditPizza(Pizza formData)
+            {
+            if (!ModelState.IsValid)
+                {
+                return View("Modifica");
+                }
+            using PizzaContext db = new PizzaContext();
+            Pizza pizza = (from p in db.Pizzas where p.Id == formData.Id select p).FirstOrDefault();
+            pizza.Nome = formData.Nome;
+            pizza.Prezzo= formData.Prezzo;
+            pizza.Descrizione = formData.Descrizione;
+            pizza.Immagine = formData.Immagine;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            }
+
+        public IActionResult DeletePizza(int id)
+            {
+            using PizzaContext db = new PizzaContext();
+            Pizza pizza = (from p in db.Pizzas where p.Id == id select p).FirstOrDefault();
+            db.Remove(pizza);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

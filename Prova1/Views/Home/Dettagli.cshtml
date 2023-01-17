@@ -2,13 +2,15 @@
 
 
 <div class="col-12 col-md-6 col-lg-4">
-    <div class="card mb-5 border">
+    <div class="card mb-5 border">  
         <img class="card-img-top img-fluid" src="@Model.Immagine" alt="@Model.Id">
         <div class="card-body pb-0">
             <h5 class="text-black text-center">@Model.Nome</h5>
         </div>
         <div class="card-body pt-0 text-center">
             <button type="button" class="btn btn-info py-1 m-2 btn-lg px-1">@Model.Prezzo</button>
+            <a href="@Url.Action("Modifica","Home",new{id=Model.Id})" class="btn btn-warning py-1 m-2 btn-lg px-1">Modifica</a>
+            <a href="@Url.Action("DeletePizza","Home",new{id=Model.Id})" class="btn btn-danger py-1 m-2 btn-lg px-1">Elimina</a>
             <p>@Model.Descrizione</p>
         </div>
     </div>
